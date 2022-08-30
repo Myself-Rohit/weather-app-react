@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Time from "./Time"
 
 function App() {
 
@@ -14,7 +15,6 @@ function App() {
       try {await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=08ac16ad8922d28316e563b806e84f37`)
         .then((response) => response.data)
         .then((data) => {
-          console.log("data>>>>>>", data)
           setInfo(true);
           setData(data);
         })
@@ -36,15 +36,6 @@ function App() {
   let year = d.getFullYear();
   let month = d.toLocaleString("default", { month: "long" });
   let day = d.toLocaleString("default", { weekday: "long" });
-
-  let time = d.toLocaleString([], {
-    hour: "2-digit",
-    minute: "2-digit",
-    second:"2-digit"
-  })
-
-
-
 
   let bgImage;
   let icon;
@@ -82,9 +73,17 @@ function App() {
       bgImage = "https://images.unsplash.com/photo-1635252517690-1a4438427ba1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDI0fHxzbW9rZSUyMHdlYXRoZXJ8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60";
       icon="https://img.icons8.com/external-others-pike-picture/344/external-Smoke-Clouds-hookah-others-pike-picture.png"
     }
+    if (description === "moderate rain") {
+      bgImage = " https://images.unsplash.com/photo-1507027682794-35e6c12ad5b4?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDJ8fG1vZGVyYXRlJTIwcmFpbnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60";
+      icon="https://img.icons8.com/external-flatart-icons-flat-flatarticons/2x/external-rain-nature-flatart-icons-flat-flatarticons.png"
+    }
+    if (description === "fog") {
+      bgImage = "https://images.unsplash.com/photo-1479476437642-f85d89e5ad7b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjN8fGZvZ2d5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60";
+      icon="https://img.icons8.com/external-others-phat-plus/2x/external-calm-weather-color-line-others-phat-plus-20.png"
+    }
   }
-
-
+ 
+ 
   return (
     <>
       <img className="absolute h-screen w-screen -z-50 bg-no-repeat" src={bgImage} />
@@ -106,8 +105,9 @@ function App() {
         {(typeof data.main !== "undefined") ? (
           info && <div className="py-10 mt-5 w-2/3 h-4/5 flex flex-col items-center bg-black bg-opacity-70 rounded-md text-white ">
           <h1 className='font-extrabold text-5xl'>{data.name}</h1>
-          <p class="font-medium text-medium mt-5 mb-5">{day}, {month}, {year}, {date}</p>
-          <p>{time}</p>
+            <p class="font-medium text-medium mt-5 mb-5">{day}, {month}, {year}, {date}</p>
+            
+            <Time/>
           <span className="my-4 border-t border-white w-full"></span>
 
           <img className="w-20 h-20" src={icon} />
