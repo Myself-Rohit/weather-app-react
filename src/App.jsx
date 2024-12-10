@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import Time from "./Time";
 import useDescription from "./description.js";
-import { API_KEY } from "./key.js";
 
 function App() {
 	const [search, setSearch] = useState("london");
@@ -16,7 +15,7 @@ function App() {
 			try {
 				await axios
 					.get(
-						`https://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${search}&aqi=no`
+						`https://api.weatherapi.com/v1/current.json?key=266a3463236a46f9bc0153539240612&q=${search}&aqi=no`
 					)
 					.then((response) => response.data)
 					.then((data) => {
