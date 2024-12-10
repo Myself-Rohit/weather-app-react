@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Time from "./Time";
-import useDescription from "./description";
+import useDescription from "./description.js";
 
 function App() {
 	const [search, setSearch] = useState("london");
